@@ -17,17 +17,26 @@ const CardFront = styled.img`
   transition: transform 0.5s;
   }
 `;
+
+const cardList = [
+  cardback,
+  card,
+  cardback
+]
+
 function App() {
   const [flippedCard, setFlippedCard]: [
     string,
     React.Dispatch<React.SetStateAction<string>>
   ] = useState<string>('');
   const [score, setScore] = useState(0);
+  const [message, setMessage] = useState('');
 
   function cardAdd(newCard: string) {
     if(flippedCard.length !== 0 && flippedCard === newCard) {
       let scorePoint = score;
       setScore(++scorePoint);
+      setMessage('Hit!')
       return;
     }
     setFlippedCard(newCard);
@@ -35,9 +44,9 @@ function App() {
 
   return (
     <div className="App">
+      {message}
       <div>
-        <Card cardAdd={cardAdd} />
-        <Card cardAdd={cardAdd} />
+        {cardList.map( i => <Card cardAdd={cardAdd} cardImg={i}  />)}
       </div>
     </div>
   );

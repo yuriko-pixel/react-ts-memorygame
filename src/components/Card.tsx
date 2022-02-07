@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import cardback from '../images/cardback.jpg'
 import card from '../images/card.jpg'
 import styled from 'styled-components'
 
@@ -18,15 +17,16 @@ transition: transform 0.5s;
 `;
 
 type Props = {
-    cardAdd: (newCard: string) => void;
+    cardAdd: (newCard: string) => void,
+    cardImg: string
 }
 
 const Card: React.FC<Props> = (props) => {
 
-  const [cardsrc, setCardSrc] = useState('./images/cardback.jpg')
+  const [cardsrc, setCardSrc] = useState('./images/card.jpg')
   
   const changeCardImage = () => {
-    setCardSrc(cardback)
+    setCardSrc(props.cardImg)
   }
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Card: React.FC<Props> = (props) => {
         <CardFront 
             onClick={() => {
             changeCardImage();
-            props.cardAdd('Card1')
+            props.cardAdd(props.cardImg)
           }} 
           src={cardsrc}
           />)
